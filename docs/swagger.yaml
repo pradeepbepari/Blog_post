@@ -1,0 +1,148 @@
+basePath: /api/v1
+definitions:
+  models.BlogPost:
+    properties:
+      body:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a sample swagger for Blog Posts API.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Blog Posts API
+  version: "1.0"
+paths:
+  /posts:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves all blog posts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.BlogPost'
+            type: array
+        "500":
+          description: '{\"error\": \"Internal server error\"}'
+      summary: Get all blog posts
+      tags:
+      - Public
+    post:
+      consumes:
+      - application/json
+      description: Creates a new blog post with the provided details
+      parameters:
+      - description: Blog post details
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: '{\"error\": \"Bad request\"}'
+        "500":
+          description: '{\"error\": \"Internal server error\"}'
+      summary: Create a new blog post
+      tags:
+      - Public
+  /posts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a blog post by its ID
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{\"message\": \"post deleted successfully\", \"postID\": \"<id>\"}'
+        "400":
+          description: '{\"error\": \"Post ID is required\"}'
+        "500":
+          description: '{\"error\": \"Internal server error\"}'
+      summary: Delete a blog post by ID
+      tags:
+      - Public
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a blog post by its ID
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BlogPost'
+        "400":
+          description: '{\"error\": \"Post ID is required\"}'
+        "500":
+          description: '{\"error\": \"Internal server error\"}'
+      summary: Get a blog post by ID
+      tags:
+      - Public
+    put:
+      consumes:
+      - application/json
+      description: Updates a blog post with the provided details
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Blog post details
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogPost'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{\"message\": \"post updated successfully\", \"postID\": \"<id>\"}'
+        "400":
+          description: '{\"error\": \"Post ID is required\"}'
+        "500":
+          description: '{\"error\": \"Internal server error\"}'
+      summary: Update a blog post by ID
+      tags:
+      - Public
+swagger: "2.0"

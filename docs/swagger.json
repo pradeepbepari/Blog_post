@@ -1,0 +1,223 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample swagger for Blog Posts API.",
+        "title": "Blog Posts API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "email": "fiber@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8080",
+    "basePath": "/api/v1",
+    "paths": {
+        "/posts": {
+            "get": {
+                "description": "Retrieves all blog posts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get all blog posts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.BlogPost"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "{\\\"error\\\": \\\"Internal server error\\\"}"
+                    }
+                }
+            },
+            "post": {
+                "description": "Creates a new blog post with the provided details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Create a new blog post",
+                "parameters": [
+                    {
+                        "description": "Blog post details",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.BlogPost"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "{\\\"error\\\": \\\"Bad request\\\"}"
+                    },
+                    "500": {
+                        "description": "{\\\"error\\\": \\\"Internal server error\\\"}"
+                    }
+                }
+            }
+        },
+        "/posts/{id}": {
+            "get": {
+                "description": "Retrieves a blog post by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Get a blog post by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.BlogPost"
+                        }
+                    },
+                    "400": {
+                        "description": "{\\\"error\\\": \\\"Post ID is required\\\"}"
+                    },
+                    "500": {
+                        "description": "{\\\"error\\\": \\\"Internal server error\\\"}"
+                    }
+                }
+            },
+            "put": {
+                "description": "Updates a blog post with the provided details",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Update a blog post by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Blog post details",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.BlogPost"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\\\"message\\\": \\\"post updated successfully\\\", \\\"postID\\\": \\\"\u003cid\u003e\\\"}"
+                    },
+                    "400": {
+                        "description": "{\\\"error\\\": \\\"Post ID is required\\\"}"
+                    },
+                    "500": {
+                        "description": "{\\\"error\\\": \\\"Internal server error\\\"}"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes a blog post by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Public"
+                ],
+                "summary": "Delete a blog post by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Post ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\\\"message\\\": \\\"post deleted successfully\\\", \\\"postID\\\": \\\"\u003cid\u003e\\\"}"
+                    },
+                    "400": {
+                        "description": "{\\\"error\\\": \\\"Post ID is required\\\"}"
+                    },
+                    "500": {
+                        "description": "{\\\"error\\\": \\\"Internal server error\\\"}"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.BlogPost": {
+            "type": "object",
+            "properties": {
+                "body": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

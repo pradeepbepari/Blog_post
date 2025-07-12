@@ -1,0 +1,40 @@
+services:
+  blog-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE: Blog-Database
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: root
+      DB_PASSWORD: root
+      BLOG_PORT: 8080
+    depends_on:
+      - postgres
+    networks:
+      - go-networks
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: Blog-Database
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - go-networks
+
+networks:
+  go-networks:
+    driver: bridge
+
+volumes:
+  postgres_data:
