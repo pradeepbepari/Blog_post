@@ -33,7 +33,8 @@ jobs:
       run: go mod tidy
 
     - name: Build Go app
-      run: go build -o main ./main.go
+      run: go build -v -o main ./main.go
+
 
     - name: Run tests (optional)
       run: go test ./...
